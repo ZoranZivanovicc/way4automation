@@ -1,5 +1,6 @@
 package testcases;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,12 +12,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public class TestProperties {
     public static WebDriver driver;
     public static Properties or = new Properties();
     public static Properties config = new Properties();
     public static FileInputStream fis;
+
+
+
     public static void main(String[] args) throws IOException {
         Properties or = new Properties();
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\properties\\OR.properties");
@@ -27,13 +32,13 @@ public class TestProperties {
         config.load(fis2);
         System.out.println(config.getProperty("testsiteurl"));
         if (config.getProperty("browser").equals("chrome")){
-            System.setProperty(config.getProperty("chromedriverkey"),System.getProperty("user.dir")+config.getProperty("chromedriverpath"));
+            WebDriverManager.chromedriver().setup();
             driver=new ChromeDriver();
         } else if (config.getProperty("browser").equals("firefox")){
-            System.setProperty(config.getProperty("geckodriverkey"),System.getProperty("user.dir")+config.getProperty("geckodriverpath"));
+            WebDriverManager.firefoxdriver().setup();
             driver=new FirefoxDriver();
         } else if (config.getProperty("browser").equals("ie")){
-            System.setProperty(config.getProperty("iedriverkey"),System.getProperty("user.dir")+config.getProperty("iedriverpath"));
+            WebDriverManager.iedriver().setup();
             driver=new InternetExplorerDriver();
         }
         driver.get(config.getProperty("testsiteurl"));

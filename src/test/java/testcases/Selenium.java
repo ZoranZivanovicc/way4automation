@@ -1,3 +1,4 @@
+package testcases;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -5,7 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.apache.commons.io.FileUtils;
+import testcases.SendMailUsingAuthentication;
 
 import java.io.File;
 import java.io.IOException;
